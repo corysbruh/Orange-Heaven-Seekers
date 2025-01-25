@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Table data
     const data = [
-        { name: "John Doe", address: 28, website: " ", number: "New York" }
+        { name: "Chick-fil-A", address: "4127 Campus Dr, Irvine, CA 92612", website: " ", number: "New York" }
     ];
 
     // Button click event to create the table
@@ -42,15 +42,13 @@ $(document).ready(function () {
             $("<td>")
                 .text(row.name)
                 .css({ border: "1px solid #ddd", padding: "8px", width: "10%", height: "10%"})
-                .on("click", function () {
-                    alert(`You clicked on: ${row.name}`);
-                })
                 .appendTo($row);
             $("<td>")
                 .text(row.address)
                 .css({ border: "1px solid #ddd", padding: "8px" })
                 .on("click", function () {
-                    alert(`You clicked on: ${row.address}`);
+                    setDestination(row.address)
+                    $(this).css("color", "blue"); 
                 })
                 .appendTo($row);
             $("<td>")
@@ -63,9 +61,6 @@ $(document).ready(function () {
             $("<td>")
                 .text(row.number)
                 .css({ border: "1px solid #ddd", padding: "8px" })
-                .on("click", function () {
-                    alert(`You clicked on: ${row.number}`);
-                })
                 .appendTo($row);
             $row.appendTo($tbody);
         });
