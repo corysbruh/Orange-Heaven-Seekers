@@ -12,9 +12,13 @@ function initMap() {
     directionsRenderer.setMap(map);
 }
 
+function setDestination(){
+    return document.getElementById("userDestination").value;
+}
+
 function calculateRoute() {
-    const origin = document.getElementById('origin').value;
-    const destination = document.getElementById('destination').value;
+    const origin = document.getElementById('userAddress').value;
+    const destination = setDestination()
 
     if (!origin || !destination) {
         alert('Please enter both origin and destination.');
