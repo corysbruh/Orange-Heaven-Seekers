@@ -7,14 +7,18 @@
     <title>Orange Heaven Seeker</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="orangeHeavenSeeker.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="test.js"></script>
 </head>
 <body>
     <header>
         Orange Heaven Seeker
     </header>
     <div class="controls">
-        <input type="text" id="origin" placeholder="Enter origin">
-        <input type="text" id="destination" placeholder="Enter destination">
+        <input type="text" id="userAddress" placeholder="Enter origin">
+        <button id="create-table-btn">Create Table</button>
+        <div id="table-container"></div>
+        <input type="button" id="userDestination" value="18032 Culver Dr, Irvine, CA 92612" onclick="setDestination()">
         <button onclick="calculateRoute()">Get Directions</button>
     </div>
     <div id="map"></div>
