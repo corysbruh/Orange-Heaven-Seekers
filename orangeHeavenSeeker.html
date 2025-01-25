@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="orangeHeavenSeeker.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="test.js"></script>
+    <script src="createShelterList.js"></script>
 </head>
 <body>
     <header>
@@ -16,9 +16,9 @@
     </header>
     <div class="controls">
         <input type="text" id="userAddress" placeholder="Enter origin">
-        <button id="create-table-btn">Create Table</button>
+        <button id="create-table-btn">Get Shelters Near You</button>
         <div id="table-container"></div>
-        <input type="button" id="userDestination" value="18032 Culver Dr, Irvine, CA 92612" onclick="setDestination()">
+        <!-- <input type="button" id="userDestination" value="18032 Culver Dr, Irvine, CA 92612" onclick="setDestination()"> -->
         <button onclick="calculateRoute()">Get Directions</button>
     </div>
     <div id="map"></div>
