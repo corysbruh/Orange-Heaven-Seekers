@@ -1,5 +1,4 @@
 from random import random
-from selenium_stealth import stealth
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -7,15 +6,6 @@ from flask import Flask
 from flask import jsonify
 
 app = Flask(__name__)
-
-def sStealth(dri):
-    stealth(dri, 
-            languages=["en-US", "en"], 
-            vendor="Google Inc.", 
-            platform="Win32", 
-            webgl_vendor="Intel Inc.", 
-            renderer="Intel Iris OpenGL Engine", 
-            fix_hairline=True)
 
 def get_rand_info():
     ua = ['Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36', 
@@ -56,7 +46,6 @@ def remove_dir(lis:list):
 
 def scrape(loc:str): 
     driver = webdriver.Chrome(options = initialize_param())
-    sStealth(driver)
 
     driver.get(f"https://www.hud.gov/findshelter/Search?search-for=shelter&place={loc}&keyword=")
     name_lis = driver.find_elements(By.XPATH, "//ul[@id='results']/li/h6")
