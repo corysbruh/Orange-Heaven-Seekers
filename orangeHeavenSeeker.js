@@ -4,8 +4,8 @@ let directionsRenderer;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 37.7749, lng: -122.4194 }, // San Francisco
-        zoom: 13,
+        center: { lat: 33.7175, lng: -117.8311 }, 
+        zoom: 12,
     });
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
@@ -34,6 +34,9 @@ function calculateRoute() {
     directionsService.route(request, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
+            const output = document.querySelector("#output");
+            output.innerHTML = "<div class='alert-info'> From: " + document.getElementById(origin).value + ".<br/>To: " + document.getElementById(destination).value + ". <br /> Driving distance:" + result.routes[0].legs[0].distance.text + ".<br /> Duration: " + result.routes[0].legs[0].duration.text + ". </div>";
+            directionsDisplay.setDirections(result);
         } else {
             alert('Directions request failed due to ' + status);
         }

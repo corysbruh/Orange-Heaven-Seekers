@@ -1,7 +1,8 @@
 $(document).ready(function () {
     // Table data
-    const data = [
-        { name: "Chick-fil-A", address: "4127 Campus Dr, Irvine, CA 92612", website: " ", number: "New York" }
+    data = [
+        { name: "Alexandria House", address: "4127 Campus Dr, Irvine, CA 92612", website: " ", number: "New York" },
+        { name: "bob"}
     ];
 
     // Button click event to create the table
