@@ -1,4 +1,4 @@
-# Shelter Scan
+# ShelterSCAN
 
 ## Inspiration
 
