@@ -1,6 +1,7 @@
 let map;
 let directionsService;
 let directionsRenderer;
+let userDestination;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -12,13 +13,13 @@ function initMap() {
     directionsRenderer.setMap(map);
 }
 
-function setDestination(){
-    return document.getElementById("userDestination").value;
+function setDestination(address){
+    userDestination = address;
 }
 
 function calculateRoute() {
     const origin = document.getElementById('userAddress').value;
-    const destination = setDestination();
+    const destination = userDestination;
 
     if (!origin || !destination) {
         alert('Please enter both origin and destination.');
