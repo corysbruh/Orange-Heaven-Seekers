@@ -4,8 +4,20 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from flask import Flask
 from flask import jsonify
+from time import sleep
 
 app = Flask(__name__)
+
+def check_loaded(path:str, dri:webdriver.Chrome):
+    while True:
+        try:
+            ele = dri.find_elements(By.XPATH, path)
+            if len(ele)==0:
+                raise ValueError("Nothing found")
+            return ele
+        except ValueError as e:
+            print(e)
+            sleep(1)
 
 def get_rand_info():
     ua = ['Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36', 
@@ -30,10 +42,14 @@ def initialize_param():
 
 def organize(loc_name_lis:list, info_lis:list):
     assert len(loc_name_lis)==len(info_lis)
-    dictionary = {}
+    organized = []
     for i in range(len(info_lis)):
-        dictionary[loc_name_lis[i]] = info_lis[i]
-    return dictionary
+        dix = {}
+        dix["name"] = loc_name_lis[i].get_attribute("textContent")
+        for num in info_lis[i]:
+            dix[num.get_attribute("class")] = num.get_attribute("textContent")
+        organized.append(dix)
+    return organized
 
 def remove_dir(lis:list):
     temp = []
@@ -48,36 +64,35 @@ def scrape(loc:str):
     driver = webdriver.Chrome(options = initialize_param())
 
     driver.get(f"https://www.hud.gov/findshelter/Search?search-for=shelter&place={loc}&keyword=")
-    name_lis = driver.find_elements(By.XPATH, "//ul[@id='results']/li/h6")
-    info_lis = driver.find_elements(By.XPATH, "//ul[@id='results']/li/ul/li")
 
-    for i in range(len(name_lis)): 
-        name_lis[i] = name_lis[i].get_attribute("textContent")
+    name_lis = check_loaded("//ul[@id='results']/li/h6", driver)
+    info_lis = check_loaded("//ul[@id='results']/li/ul/li", driver)
 
     parent = info_lis[0].find_element(By.XPATH, "..")
     group = []
     temp = []
-    count = 1
     info_lis = remove_dir(info_lis)
     for i in range(len(info_lis)):
         x = info_lis[i]
         if i==(len(info_lis)-1):
-            count+=1
-            temp.append(x.get_attribute("textContent"))
+            temp.append(x)
             group.append(temp)
         if parent == x.find_element(By.XPATH, ".."):
-            temp.append(x.get_attribute("textContent"))
+            temp.append(x)
         else:
-            count+=1
             parent = x.find_element(By.XPATH, "..")
             group.append(temp)
             temp = []
-            temp.append(x.get_attribute("textContent"))
-    return organize(name_lis, group)
+            temp.append(x)
+    final = {"dix":organize(name_lis, group)}
+    print(final)
+    return final
 
-@app.route("/shelter_loc/<loc>")
+@app.route("/shelter_loc/<loc>", methods=['GET'])
 def shelter_loc(loc):
-    return jsonify(scrape(loc))
+    res = jsonify(scrape(loc))
+    res.headers.add('Access-Control-Allow-Origin', '*')
+    return res
 
 if __name__ == "__main__":
     shelter_loc("irvine")
