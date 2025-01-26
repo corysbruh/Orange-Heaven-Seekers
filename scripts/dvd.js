@@ -4,8 +4,8 @@ const image = document.getElementById('bouncing-image');
 // Set initial position, direction, and rotation
 let x = 0;
 let y = 0;
-let dx = 2; // speed in the X direction
-let dy = 2; // speed in the Y direction
+let dx = 4; // speed in the X direction
+let dy = 4; // speed in the Y direction
 let rotation = 0; // initial rotation angle
 
 function moveImage() {
@@ -26,7 +26,6 @@ function moveImage() {
 
     // Rotate the image (increase the angle)
     rotation += 2; // Increase by 2 degrees per frame
-    if (rotation >= 360) rotation = 0; // Reset the rotation angle to avoid overflow
 
     // Apply position and rotation using CSS transform
     image.style.left = x + 'px';

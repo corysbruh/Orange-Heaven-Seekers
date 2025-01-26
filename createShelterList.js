@@ -18,27 +18,28 @@ function get_shelter() {
             localStorage.setItem('origin', JSON.stringify(val));
             window.location.href = window.location.origin + '/orangeHeavenSeeker.html';
             removeLebron();
-            //let userLocation;
-//             geocodeAddress(val)
-//             .then((location) => {
-//                 userLocation =  location;
-//             })
-//             console.timeEnd();
-//             let counter = 0;
-//             console.log(myJson);
-//             let data = createData(myJson, () => {
-//                 counter++;
-//                 console.log(counter);
-//                 console.log(myJson.dix.length);
-//                 if( counter == myJson.dix.length){
-//                     for( let i in data){
-//                         myJson.dix[i].distance = calculateHaversineDistance(userLocation, myJson.dix[i].distance);
-//                         console.log(myJson.dix[i].distance);
-//                     }
-//                     data.sort((a, b) => a.distance - b.distance);
-//                     createTable(data);
-//                 }
-//             });
+
+            let userLocation;
+            geocodeAddress(val)
+            .then((location) => {
+                userLocation =  location;
+            })
+            console.timeEnd();
+            let counter = 0;
+            console.log(myJson);
+            let data = createData(myJson, () => {
+                counter++;
+                console.log(counter);
+                console.log(myJson.dix.length);
+                if( counter == myJson.dix.length){
+                    for( let i in data){
+                        myJson.dix[i].distance = calculateHaversineDistance(userLocation, myJson.dix[i].distance);
+                        console.log(myJson.dix[i].distance);
+                    }
+                    data.sort((a, b) => a.distance - b.distance);
+                    createTable(data);
+                }
+            });
             // // Clear existing data and push the fetched data
             // let data = []; // Local data array
             // for (var i in myJson.dix) {
@@ -53,54 +54,55 @@ function get_shelter() {
             console.error("Error fetching data:", error);
         });
 }
-// function createData(json, callback){
-//     let data = []; 
-//         for (let i in json.dix) {
-//             setTimeout(() => {
-//                 geocodeAddress(json.dix[i].address)
-//                 .then((location) => {
-//                     console.log(location);
-//                     json.dix[i]["distance"] = location;
-//                     data.push(json.dix[i]);
-//                 })
-//                 callback()
-//             }, i * 100);
-//         }
+
+function createData(json, callback){
+    let data = []; 
+        for (let i in json.dix) {
+            setTimeout(() => {
+                geocodeAddress(json.dix[i].address)
+                .then((location) => {
+                    console.log(location);
+                    json.dix[i]["distance"] = location;
+                    data.push(json.dix[i]);
+                })
+                callback()
+            }, i * 100);
+        }
     
-//     console.log(" s")
-//     return data;
-// }
+    console.log(" s")
+    return data;
+}
 
-// function geocodeAddress(address) {
-//     const geocoder = new google.maps.Geocoder();
-//     return new Promise((resolve, reject) => {
-//         geocoder.geocode({ address: address }, (results, status) => {
-//             if (status === "OK") {
-//                 const location = results[0].geometry.location;
-//                 resolve({ lat: location.lat(), lng: location.lng() });
-//             } else {
-//                 console.error("Geocoding failed:", status);
-//                 reject(null);
-//             }
-//         });
-//     });
-// }
+function geocodeAddress(address) {
+    const geocoder = new google.maps.Geocoder();
+    return new Promise((resolve, reject) => {
+        geocoder.geocode({ address: address }, (results, status) => {
+            if (status === "OK") {
+                const location = results[0].geometry.location;
+                resolve({ lat: location.lat(), lng: location.lng() });
+            } else {
+                console.error("Geocoding failed:", status);
+                reject(null);
+            }
+        });
+    });
+}
 
-//function calculateHaversineDistance(loc1, loc2) {
-//     const R = 6371; 
-//     const lat1 = loc1.lat * (Math.PI / 180);
-//     const lat2 = loc2.lat * (Math.PI / 180);
-//     const deltaLat = (loc2.lat - loc1.lat) * (Math.PI / 180);
-//     const deltaLng = (loc2.lng - loc1.lng) * (Math.PI / 180);
+function calculateHaversineDistance(loc1, loc2) {
+    const R = 6371; 
+    const lat1 = loc1.lat * (Math.PI / 180);
+    const lat2 = loc2.lat * (Math.PI / 180);
+    const deltaLat = (loc2.lat - loc1.lat) * (Math.PI / 180);
+    const deltaLng = (loc2.lng - loc1.lng) * (Math.PI / 180);
 
-//     const a =
-//         Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-//         Math.cos(lat1) * Math.cos(lat2) *
-//         Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2);
+    const a =
+        Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+        Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2);
 
-//     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//     return R * c; 
-// }
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; 
+}
 
 // Function to create and append the table using jQuery
 function createTable(data) {
