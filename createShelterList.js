@@ -13,7 +13,6 @@ function get_shelter(){
                 data.push(myJson.dix[i])
             }
             console.log(data)
-
         });
 }
 
@@ -21,8 +20,11 @@ function get_shelter(){
 $(document).ready(function () {
     // Table data
     data = [
-        { name: "Alexandria House", address: "4127 Campus Dr, Irvine, CA 92612", website: " ", number: "New York" },
-        { name: "bob"}
+        { name: "Chick-fil-A", address: "4127 Campus Dr, Irvine, CA 92612", website: "https://www.chick-fil-a.com/locations/ca/university-center-irvine?utm_source=yext&utm_medium=link", number: "+19497250230" },
+        { name: "Round Table Pizza", address: "4551 Jamboree Rd, Newport Beach, CA 92660", website: "", number: "+19493879877"},
+        { name: "Herb & Ranch", address: "5301 California Ave #140, Irvine, CA 92617", website: "", number: "+19493164491"},
+        { name: "Starbucks", address: "4545 Campus Dr, Irvine, CA 92612", website: "", number: "+19498542301"},
+        { name: "Taco Bell", address: "4101 Campus Dr, Irvine, CA 92612", website: "", number: "+19497258348"}
     ];
 
     // Button click event to create the table
