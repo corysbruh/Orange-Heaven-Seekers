@@ -16,7 +16,7 @@ function get_shelter() {
             // funny bunnies going rogue
             localStorage.setItem('shelterData', JSON.stringify(myJson.dix));
             localStorage.setItem('origin', JSON.stringify(val));
-            window.location.href = window.location.origin + '/orangeHeavenSeeker.html';
+            window.location.href = 'orangeHeavenSeeker.html';
             removeLebron();
 
             let userLocation;
