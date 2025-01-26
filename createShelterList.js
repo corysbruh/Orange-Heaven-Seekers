@@ -74,14 +74,14 @@ function createTable(data) {
                 })
                 .appendTo($row);
             $("<td>")
-                .text(row.website)
+                .text(row.web)
                 .css({ border: "1px solid #ddd", padding: "8px" })
                 .on("click", function () {
                     alert(`You clicked on: ${row.website}`);
                 })
                 .appendTo($row);
             $("<td>")
-                .text(row.number)
+                .text(row.phone)
                 .css({ border: "1px solid #ddd", padding: "8px" })
                 .appendTo($row);
             $row.appendTo($tbody);
