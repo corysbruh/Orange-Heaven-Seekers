@@ -1,3 +1,23 @@
+function get_shelter(){
+    let val = document.getElementById("userAddress").value
+    site = "http://127.0.0.1:5000/shelter_loc/"+val
+    console.log(site)
+    fetch(site)
+        .then((response) => {
+            console.log(response)
+            return response.json();
+        })
+        .then((myJson) => {
+            console.log(myJson.dix)
+            for (var i in myJson.dix){
+                data.push(myJson.dix[i])
+            }
+            console.log(data)
+
+        });
+}
+
+
 $(document).ready(function () {
     // Table data
     data = [
