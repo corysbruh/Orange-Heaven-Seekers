@@ -13,10 +13,11 @@ function get_shelter() {
             console.log(myJson.dix);
 
             // funny bunnies going rogue
-            removeLebron();
             localStorage.setItem('shelterData', JSON.stringify(myJson.dix));
             localStorage.setItem('origin', JSON.stringify(val));
             window.location.href = window.location.origin + '/orangeHeavenSeeker.html';
+            removeLebron();
+
             // // Clear existing data and push the fetched data
             // let data = []; // Local data array
             // for (var i in myJson.dix) {
