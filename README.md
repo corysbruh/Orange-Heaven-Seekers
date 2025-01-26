@@ -32,7 +32,7 @@ d
 - d
 - d
 
-## What's next for ZotConnect
+## What's next for Shelter Scan
 
 - d
 - d
