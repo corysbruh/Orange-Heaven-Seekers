@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +8,41 @@
     <link rel="stylesheet" href="orangeHeavenSeeker.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="createShelterList.js"></script>
+
+    <link rel="stylesheet" href="./styles/dvd.css">
 </head>
 <body>
     <header>
         Orange Heaven Seeker
     </header>
-    <div class="controls">
-        <input type="text" id="userAddress" placeholder="Enter origin">
-        <button id="create-table-btn" onclick = get_shelter()>Get Shelters Near You</button>
-        <div id="table-container"></div>
-        <div id="output" ></div>
+    <div class="main-content">
+        <div class="left-column">
+            <div class="controls">
+                <input type="text" id="userAddress" placeholder="Enter origin">
+                <button id="create-table-btn" onclick="get_shelter()">Get Shelters Near You</button>
+            </div>
+            <div id="table-container" class="table-section"></div>
+            <div id="output"></div>
+        </div>
+        <div class="right-column">
+            <div id="map" class="map-section"></div>
+        </div>
     </div>
-    <div id="map"></div>
+
+    <div id="dvd-overlay" class="hidden">
+        <div id="bouncing-image"></div>
+    </div>
+
+    <script src="./scripts/dvd.js"></script>
     <script src="orangeHeavenSeeker.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpOqQpp9edLWSJWlixD2bnmYaufSBiGUA&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpOqQpp9edLWSJWlixD2bnmYaufSBiGUA&libraries=places&callback=initGoogleAPI" async defer></script>
+    <script>
+        $(document).ready(function () {
+            const data = JSON.parse(localStorage.getItem('shelterData'));
+            if (data) {
+                createTable(data);
+            }
+        });
+    </script>
 </body>
 </html>

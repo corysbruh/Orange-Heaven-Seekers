@@ -1,37 +1,96 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
 header {
-    background-color: #4285F4;
+    background-color: #ff6600;
     color: white;
-    text-align: center;
     padding: 20px;
-    font-size: 24px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
 }
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.left-column,
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-column {
+    margin-right: 20px;
+    overflow-y: auto;  /* Enable vertical scrolling in the left column */
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.controls input,
+.controls button {
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.controls button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: #cc5200;
+}
+
+.table-section {
+    flex: 1;
+    margin-bottom: 20px;
+    max-height: 500px; /* Set a maximum height for the table section */
+    overflow-y: auto;  /* Enable vertical scrolling if the table content exceeds the max height */
+}
+
+#output {
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.right-column {
+    flex: 1;
+}
+
+.map-section {
+    height: 500px;
+    background-color: #e6e6e6;
+}
+
 #map {
     height: 80vh;
     width: 100%;
 }
-.controls {
-    padding: 20px;
-    text-align: center;
-}
-.controls input {
-    padding: 10px;
-    margin: 5px;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-.controls button {
-    padding: 10px 20px;
-    background-color: #4285F4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-.controls button:hover {
-    background-color: #3367D6;
+
+.hidden {
+    display: none;
 }

@@ -12,15 +12,20 @@ function get_shelter() {
         .then((myJson) => {
             console.log(myJson.dix);
 
-            // Clear existing data and push the fetched data
-            let data = []; // Local data array
-            for (var i in myJson.dix) {
-                data.push(myJson.dix[i]);
-            }
-            console.log(data);
+            // funny bunnies going rogue
+            removeLebron();
+            localStorage.setItem('shelterData', JSON.stringify(myJson.dix));
+            localStorage.setItem('origin', JSON.stringify(val));
+            window.location.href = window.location.origin + '/orangeHeavenSeeker.html';
+            // // Clear existing data and push the fetched data
+            // let data = []; // Local data array
+            // for (var i in myJson.dix) {
+            //     data.push(myJson.dix[i]);
+            // }
+            // console.log(data);
 
-            // Create the table immediately after fetch completes
-            createTable(data);
+            // // Create the table immediately after fetch completes
+            // createTable(data);
         })
         .catch((error) => {
             console.error("Error fetching data:", error);
@@ -91,4 +96,9 @@ function createTable(data) {
         // Append the table to the container
         $("#table-container").append($table);
     });
+}
+
+function removeLebron() {
+    const overlay = document.getElementById('dvd-overlay');
+    overlay.classList.add('hidden');
 }
