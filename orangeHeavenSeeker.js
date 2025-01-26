@@ -18,7 +18,7 @@ function setDestination(){
 
 function calculateRoute() {
     const origin = document.getElementById('userAddress').value;
-    const destination = setDestination()
+    const destination = setDestination();
 
     if (!origin || !destination) {
         alert('Please enter both origin and destination.');
@@ -35,7 +35,8 @@ function calculateRoute() {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(result);
             const output = document.querySelector("#output");
-            output.innerHTML = "<div class='alert-info'> From: " + document.getElementById(origin).value + ".<br/>To: " + document.getElementById(destination).value + ". <br /> Driving distance:" + result.routes[0].legs[0].distance.text + ".<br /> Duration: " + result.routes[0].legs[0].duration.text + ". </div>";
+            //output.innerHTML = "<div class='alert-info'> From: " + document.getElementById("userAddress").value + ".<br/>To: " + document.getElementById("userDestination").value + ". <br /> Driving distance:" + result.routes[0].legs[0].distance.text + ".<br /> Duration: " + result.routes[0].legs[0].duration.text + ". </div>";
+            output.innerHTML = "<div class='alert-info'> Driving Distance: " + result.routes[0].legs[0].distance.text + "<br /> Driving Duration: " + result.routes[0].legs[0].duration.text + "</div>";
             directionsDisplay.setDirections(result);
         } else {
             alert('Directions request failed due to ' + status);
