@@ -71,6 +71,7 @@ $(document).ready(function () {
                 .css({ border: "1px solid #ddd", padding: "8px" })
                 .on("click", function () {
                     setDestination(row.address)
+                    calculateRoute()
                     $(this).css("color", "blue"); 
                 })
                 .appendTo($row);
